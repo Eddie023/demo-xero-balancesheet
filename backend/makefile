@@ -22,8 +22,3 @@ lint:
 	--volume ~/.cache:/root./.cache \
 	$$(docker build --quiet --file lint.Dockerfile .) 
 
-api_call:
-	curl -X GET http://localhost:8080/api/equityPositions?token=fJCoxhq8uR9GiUIgaIGfMgw7zCqxwDhQ | jq .
-
-api_call_invalid_token:
-	curl -I  GET http://localhost:8080/api/equityPositions?token=invalid 
