@@ -1,0 +1,26 @@
+services:
+  server:
+    build: ./backend
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/go/src/accounting
+    environment:
+      - XERO_BASE_URL=http://xero:3000
+  xero:
+    image: jaypeng2015/show-me-the-money
+    ports:
+      - 4000:3000
+
+  frontend:
+    build: ./frontend
+    volumes:
+      - "./:/app"
+      - "/app/node_modules"
+    ports:
+      - 3000:3000
+    stdin_open: true
+    environment:
+      - REACT_APP_API_SERVER_BASE_URL="http://localhost:8080/"
+    command: npm run start
+  
